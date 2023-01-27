@@ -13,7 +13,7 @@ function BuySellBooks() {
         <div className="row">
           <div className="col-12 d-flex align-items-center justify-content-between mx-5">
             <span className="mx-5 h1 my-4 ">BUY BOOKS</span>
-            <form className="d-flex me-2 w-25" onSubmit={onSearchClicked}>
+            <form className="d-flex w-25" onSubmit={onSearchClicked}>
               <input
                 className="form-control me-2"
                 type="search"
