@@ -13,7 +13,20 @@ function Login() {
   const token = localStorage.getItem("userUNID");
 
   useEffect(() => {
-    async function fetchData() {}
+    async function fetchData() {
+      if (token) {
+        let response = await axios.post(
+          "http://localhost:8000/auth/verify-unid",
+          {
+            UNID: token,
+          }
+        );
+        if (response.data.error) {
+          localStorage.clear();
+          window.location.replace("http://localhost:3000");
+        }
+      }
+    }
     fetchData();
   }, []);
 
@@ -33,6 +46,20 @@ function Login() {
     if (!validateEmail()) {
       setEmailErrorClass("block");
       return;
+    }
+
+    let response = await axios.post("http://localhost:8000/auth/login", {
+      email: email,
+      password: password,
+    });
+
+    if (response.data.error) {
+      setErrorClass("block");
+      setError(response.data.error);
+      return;
+    } else {
+      localStorage.setItem("userUNID", response.data.data.userUNID);
+      window.location.replace("http://localhost:3000");
     }
   }
 

@@ -4,8 +4,7 @@ import { Modal } from "bootstrap";
 import { useNavigate } from "react-router-dom";
 
 function Register() {
-
-let navigate = useNavigate();
+  let navigate = useNavigate();
   let ref = document.referrer;
   const [name, setName] = useState("");
   const [nameErrorClass, setNameErrorClass] = useState("none");
@@ -16,15 +15,18 @@ let navigate = useNavigate();
   const [password, setPassword] = useState("");
   const [passwordErrorClass, setPasswordErrorClass] = useState("none");
   const [confirmPassword, setConfirmPassword] = useState("none");
-  const [confirmPasswordErrorClass, setConfirmPasswordErrorClass] = useState("none");
+  const [confirmPasswordErrorClass, setConfirmPasswordErrorClass] =
+    useState("none");
   const [address, setAddress] = useState("");
   const [addressErrorClass, setAddressErrorClass] = useState("none");
   const [university, setUniversity] = useState("");
   const [universityErrorClass, setUniversityErrorClass] = useState("none");
   const [postalCode, setPostalCode] = useState("none");
   const [postalCodeErrorClass, setPostalCodeErrorClass] = useState("none");
-  const [city, setCity] = useState("none");
+  const [city, setCity] = useState("");
   const [cityErrorClass, setCityErrorClass] = useState("none");
+  const [nid, setNid] = useState("");
+  const [nidErrorClass, setNidErrorClass] = useState("none");
 
   const [error, setError] = useState("");
   const [errorClass, setErrorClass] = useState("none");
@@ -46,6 +48,84 @@ let navigate = useNavigate();
 
   async function handleSubmit(e) {
     e.preventDefault(); //stops the page from reloading
+    console.log(city);
+    if (name.length < 3 || name.length > 30) {
+      setNameErrorClass("block");
+      return;
+    }
+
+    if (!validateEmail()) {
+      setEmailErrorClass("block");
+      return;
+    }
+
+    if (
+      phone.length != 11 ||
+      !/^\d+$/.test(phone) ||
+      phone.slice(0, 2) != "01"
+    ) {
+      setPhoneErrorClass("block");
+      return;
+    }
+
+    if (nid.length != 10) {
+      setNidErrorClass("block");
+      return;
+    }
+
+    if (address.length < 3) {
+      setAddressErrorClass("block");
+      return;
+    }
+
+    if (city.length < 3) {
+      setCityErrorClass("block");
+      return;
+    }
+
+    if (postalCode.length != 4 || !/^\d+$/.test(postalCode)) {
+      setPostalCodeErrorClass("block");
+      return;
+    }
+
+    if (university.length < 3) {
+      setUniversityErrorClass("block");
+      return;
+    }
+
+    if (password.length < 6 || password.length > 30) {
+      setPasswordErrorClass("block");
+      return;
+    }
+
+    if (confirmPassword != password) {
+      setConfirmPasswordErrorClass("block");
+      return;
+    }
+    console.log("AISE2");
+    let response = await axios.post("http://localhost:8000/auth/register", {
+      name: name,
+      email: email,
+      phone: phone,
+      nid: nid,
+      address: address,
+      city: city,
+      postalCode: postalCode,
+      university: university,
+      password: password,
+    });
+    console.log("AISE2");
+
+    console.log(response);
+
+    if (response.data.error) {
+      setErrorClass("block");
+      setError(response.data.error);
+      return;
+    } else {
+      let myModal = new Modal(document.getElementById("exampleModal"));
+      myModal.show();
+    }
   }
   return (
     <div class="flex-grow-1 background-color d-flex align-items-center justify-content-center">
@@ -91,7 +171,7 @@ let navigate = useNavigate();
               </span>
             </div>
 
-            <div class="form-group mb-4 d-flex">
+            <div class="form-group mb-4">
               <input
                 onInput={(e) => {
                   setPhone(e.target.value);
@@ -109,7 +189,25 @@ let navigate = useNavigate();
               </span>
             </div>
 
-            <div class="form-group mb-4 d-flex">
+            <div class="form-group mb-4">
+              <input
+                onInput={(e) => {
+                  setNid(e.target.value);
+                }}
+                onChange={(e) => {
+                  setNidErrorClass("none");
+                }}
+                type="text"
+                class="form-control"
+                id="nidInput"
+                placeholder="NID"
+              ></input>
+              <span class={"text-danger d-" + nidErrorClass}>
+                Enter a valid NID
+              </span>
+            </div>
+
+            <div class="form-group mb-4">
               <input
                 onInput={(e) => {
                   setAddress(e.target.value);
@@ -127,7 +225,7 @@ let navigate = useNavigate();
               </span>
             </div>
 
-            <div class="form-group mb-4 d-flex">
+            <div class="form-group mb-4">
               <input
                 onInput={(e) => {
                   setCity(e.target.value);
@@ -145,7 +243,7 @@ let navigate = useNavigate();
               </span>
             </div>
 
-            <div class="form-group mb-4 d-flex">
+            <div class="form-group mb-4">
               <input
                 onInput={(e) => {
                   setPostalCode(e.target.value);
@@ -163,7 +261,7 @@ let navigate = useNavigate();
               </span>
             </div>
 
-            <div class="form-group mb-4 d-flex">
+            <div class="form-group mb-4">
               <input
                 onInput={(e) => {
                   setUniversity(e.target.value);
@@ -181,8 +279,7 @@ let navigate = useNavigate();
               </span>
             </div>
 
-
-            <div class="form-group mb-4 d-flex">
+            <div class="form-group mb-4">
               <input
                 onInput={(e) => {
                   setPassword(e.target.value);
@@ -201,7 +298,7 @@ let navigate = useNavigate();
               </span>
             </div>
 
-            <div class="form-group mb-4 d-flex">
+            <div class="form-group mb-4">
               <input
                 onInput={(e) => {
                   setConfirmPassword(e.target.value);
@@ -218,11 +315,6 @@ let navigate = useNavigate();
                 Password doesn't match
               </span>
             </div>
-
-
-
-            
-
             <div className="d-block">
               <span class={"mb-2 text-danger d-" + errorClass}>{error}</span>
               <button type="submit" class="btn btn-primary w-100 fw-bold">
@@ -230,16 +322,6 @@ let navigate = useNavigate();
               </button>
             </div>
           </form>
-          <div
-            className={
-              ref == "http://localhost:3000/admin-homepage"
-                ? "d-none"
-                : "d-block"
-            }
-          >
-            <hr class="my-4" />
-            <div className="d-flex justify-content-center"></div>
-          </div>
 
           {/* Modal for successful Registration */}
           <div
@@ -264,11 +346,7 @@ let navigate = useNavigate();
                     aria-label="Close"
                   ></button>
                 </div>
-                <div class="modal-body">
-                  {ref == "http://localhost:3000/admin-homepage"
-                    ? "You may login now."
-                    : "Please verify your email."}
-                </div>
+                <div class="modal-body">{"Please verify your email."}</div>
                 <div class="modal-footer">
                   <a className="btn btn-primary" href="/login">
                     Ok
