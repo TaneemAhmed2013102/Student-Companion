@@ -15,6 +15,7 @@ import ExamReminders from './Components/examReminders';
 import BuySellBooks from './Components/buySellBooks';
 import PostBookAd from './Components/postBookAd';
 import Accomodations from './Components/accomodation';
+import PostAccomodation from './Components/postAccomodation';
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -31,6 +32,7 @@ root.render(
       <Route path='/buy-sell-books' element={<BuySellBooks/>}/>
       <Route path='/post-book-ad' element={<PostBookAd/>}/>
       <Route path='/accomodations' element={<Accomodations/>}/>
+      <Route path='/post-accomodation' element={<PostAccomodation/>}/>
     </Routes>
     <Footer/>
     </BrowserRouter>
