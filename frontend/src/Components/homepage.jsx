@@ -10,7 +10,7 @@ function Homepage() {
               <h3 class="card-title">My Courses</h3>
               <p class="card-text">Check your current courses</p>
               <a href="/my-courses" class="btn btn-primary">
-                View
+                View courses
               </a>
             </div>
           </div>
@@ -20,7 +20,7 @@ function Homepage() {
               <h3 class="card-title">Find Students Near me</h3>
               <p class="card-text">Find yourself a companion</p>
               <a href="/students-near-me" class="btn btn-primary">
-                Find Students
+                Find students
               </a>
             </div>
           </div>
@@ -32,7 +32,7 @@ function Homepage() {
                 Your very own marketplace for trading books
               </p>
               <a href="/buy-sell-books" class="btn btn-primary">
-                Button
+                View marketplace
               </a>
             </div>
           </div>
@@ -46,7 +46,7 @@ function Homepage() {
                 Get Reminders for your exams for more than a day
               </p>
               <a href="/my-reminders" class="btn btn-primary">
-                My Reminders
+                My reminders
               </a>
             </div>
           </div>
@@ -58,7 +58,7 @@ function Homepage() {
                 Find students who are looking for a roommate
               </p>
               <a href="/accomodations" class="btn btn-primary">
-                Button
+                Browse
               </a>
             </div>
           </div>
