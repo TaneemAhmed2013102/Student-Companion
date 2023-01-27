@@ -15,7 +15,7 @@ function Accomodations() {
         <div className="row">
           <div className="col-12 d-flex align-items-center justify-content-between mx-5">
             <span className="mx-5 h3 my-4 ">AVAILABLE ACCOMODATIONS</span>
-            <form className="d-flex me-2 w-25" onSubmit={onSearchClicked}>
+            <form className="d-flex w-25" onSubmit={onSearchClicked}>
               <input
                 className="form-control me-2"
                 type="search"
@@ -45,7 +45,7 @@ function Accomodations() {
               <div className="col-4 border-end border-2">
                 <div className="d-flex justify-content-center">
                   <img
-                    src={require("../Assets/stack_of_books_copy.png")}
+                    src={require("../Assets/house.png")}
                     className="img-fluid rounded-start"
                     alt="..."
                     style={{ maxHeight: "180px" }}
@@ -58,7 +58,7 @@ function Accomodations() {
                   <div className="d-flex">
                     <p className="card-text me-3">
                       <small className="text-muted">
-                        <FontAwesomeIcon icon={faMapMarkerAlt} /> Bashhundhara
+                        <FontAwesomeIcon icon={faMapMarkerAlt} /> Bashundhara
                       </small>
                     </p>
                     <p className="card-text">
@@ -84,7 +84,7 @@ function Accomodations() {
               <div className="col-4 border-end border-2">
                 <div className="d-flex justify-content-center">
                   <img
-                    src={require("../Assets/stack_of_books_copy.png")}
+                    src={require("../Assets/house.png")}
                     className="img-fluid rounded-start"
                     alt="..."
                     style={{ maxHeight: "180px" }}
@@ -97,7 +97,7 @@ function Accomodations() {
                   <div className="d-flex">
                     <p className="card-text me-3">
                       <small className="text-muted">
-                        <FontAwesomeIcon icon={faMapMarkerAlt} /> Bashhundhara
+                        <FontAwesomeIcon icon={faMapMarkerAlt} /> Bashundhara
                       </small>
                     </p>
                     <p className="card-text">
